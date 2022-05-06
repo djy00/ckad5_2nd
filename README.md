@@ -1,4 +1,4 @@
-# ckad5_2th_web
+# ckad5_2nd_web
 
 # yolov5.pt 파일 압축해제 하는법
 
