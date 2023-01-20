@@ -1,8 +1,3 @@
-"""
-Simple app to upload an image via a web form 
-and view the inference results on the image in the browser.
-"""
-
 import argparse
 import io
 import os
@@ -26,8 +21,10 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def predict():
     if request.method == "POST":
-        DeleteAllFiles('C:\\web\\yolov5-flask\\static\\aft')  #파일 업로드 후 새로 검사 시작할 때마다 폴더 내 파일 삭제
-        DeleteAllFiles('C:\\web\\yolov5-flask\\static\\bef')  # 경로설정필요
+#         DeleteAllFiles('C:\\web\\yolov5-flask\\static\\aft')  #파일 업로드 후 새로 검사 시작할 때마다 폴더 내 파일 삭제
+#         DeleteAllFiles('C:\\web\\yolov5-flask\\static\\bef')  #안되면 전체경로로 바꿔서 사용
+        DeleteAllFiles('..\\static\\aft')  # 안되면 위 처럼 바꿔서 사용
+        DeleteAllFiles('..\\static\\bef')  
         
         # 다중파일 업로드
         if "file" not in request.files:
@@ -85,8 +82,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     model = torch.hub.load(
-        'ultralytics/yolov5', 'custom', path='C:\web\yolov5-flask\yolov5l.pt', autoshape=True
-    )  # force_reload = recache latest code
+        'ultralytics/yolov5', 'custom', path='..\yolov5l.pt', autoshape=True )  # 안되면 압축해제한 yolov5l.pt파일 경로로 수정
     model.eval()
 
     flask_options = dict(
